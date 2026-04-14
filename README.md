@@ -32,3 +32,20 @@ curl http://localhost:8000/user/1/engagements
 ```bash
 python scripts/benchmark.py
 ```
+## 🚀 Benchmark Summary
+
+Performance comparison of API endpoints with and without Redis caching.
+
+| Endpoint | Without Cache | With Cache |
+|----------|-------------|-----------|
+| /campaign/{id}/performance | ~30 ms | ~2.4 ms |
+| /advertiser/{id}/spending | ~30 ms | ~2.3 ms |
+
+### Notes
+- Caching significantly reduces response time (~10x faster)
+- Benchmark executed in demo mode (SQLite + simulated Redis)
+- Production setup uses MySQL + Redis via Docker Compose
+
+### Benchmark Screenshot
+
+![Benchmark](screenshots/benchmark_results.png)
