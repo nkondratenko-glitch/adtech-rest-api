@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    container_name: adtech-api
+    ports:
+      - '8000:8000'
+    environment:
+      DATABASE_URL: mysql+pymysql://adtech:adtech@mysql:3306/adtech
+      REDIS_URL: redis://redis:6379/0
+      DB_SIMULATED_DELAY_MS: 20
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  mysql:
+    image: mysql:8.4
+    container_name: adtech-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: adtech
+      MYSQL_USER: adtech
+      MYSQL_PASSWORD: adtech
+    ports:
+      - '3306:3306'
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-proot']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: adtech-redis
+    ports:
+      - '6379:6379'
+
+volumes:
+  mysql_data:
