@@ -46,6 +46,13 @@ Performance comparison of API endpoints with and without Redis caching.
 - Benchmark executed in demo mode (SQLite + simulated Redis)
 - Production setup uses MySQL + Redis via Docker Compose
 
-### Benchmark Screenshot
+### Benchmark Screenshots
 
-![Benchmark](screenshots/benchmark_results.png)
+### Campaign Performance
+![Campaign](screenshots/campaign_performance_demo.png)
+
+### Advertiser Spending
+![Advertiser](screenshots/advertiser_spending_demo.png)
+
+### User Engagements
+![User](screenshots/user_engagements_demo.png)
